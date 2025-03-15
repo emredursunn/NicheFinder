@@ -9,7 +9,7 @@ export async function GET(req) {
   const minViews = parseInt(searchParams.get("minViews") || "0", 10);
   const maxViews = parseInt(searchParams.get("maxViews") || "Infinity", 10);
   const region = searchParams.get("region") || "";
-  const maxResults = Math.min(parseInt(searchParams.get("maxResults") || "50", 10), 500); //youtube tek seferde max 50 kanal getirir, 50 nin üstü için nextpagetoekn ile yeni sorgu atılır. daha fazla quota gider.
+  const maxResults = Math.min(parseInt(searchParams.get("maxResults") || "49", 10), 500); //youtube tek seferde max 50 kanal getirir, 50 nin üstü için nextpagetoekn ile yeni sorgu atılır. daha fazla quota gider.
 
   const API_KEY = searchParams.get("apiKey");
   console.log("API KEY= ",API_KEY)
