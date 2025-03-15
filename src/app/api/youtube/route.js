@@ -9,9 +9,10 @@ export async function GET(req) {
   const minViews = parseInt(searchParams.get("minViews") || "0", 10);
   const maxViews = parseInt(searchParams.get("maxViews") || "Infinity", 10);
   const region = searchParams.get("region") || "";
-  const maxResults = Math.min(parseInt(searchParams.get("maxResults") || "25", 10), 500); //youtube tek seferde max 50 kanal getirir, 50 nin üstü için nextpagetoekn ile yeni sorgu atılır. daha fazla quota gider.
+  const maxResults = Math.min(parseInt(searchParams.get("maxResults") || "50", 10), 500); //youtube tek seferde max 50 kanal getirir, 50 nin üstü için nextpagetoekn ile yeni sorgu atılır. daha fazla quota gider.
 
   const API_KEY = searchParams.get("apiKey");
+  console.log("API KEY= ",API_KEY)
   const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
   let channels = [];
   let nextPageToken = "";
@@ -24,6 +25,7 @@ export async function GET(req) {
         `${BASE_URL}?part=snippet&type=channel&q=${query}&regionCode=${region}&maxResults=${maxResults}&pageToken=${nextPageToken}&key=${API_KEY}`
       );
       const data = await response.json();
+      console.log("Data:",data)
       if (!data.items) break;
 
       // 2. Kanal ID'lerini toplu alalım
